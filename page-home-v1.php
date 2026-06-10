@@ -274,6 +274,41 @@ get_header();
     box-shadow: 0 10px 24px rgba(0,0,0,.35);
   }
 
+  /* ── REQUEST A SHOW ── */
+  .request {
+    background: var(--mid); padding: 3rem 2rem;
+    text-align: center; border-top: 1px solid #222;
+  }
+  .request h3 {
+    font-family: 'Oswald', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 500; letter-spacing: .05em; margin-bottom: .3rem;
+  }
+  .request p { color: var(--text-gray); font-size: .9rem; margin-bottom: 0; }
+  .venues-grid {
+    display: flex; flex-wrap: wrap; gap: 1.5rem;
+    justify-content: center; max-width: 980px; margin: 0 auto;
+    align-items: baseline;
+    margin-top: 30px;
+  }
+  .venue-card {
+    display: flex; flex-direction: column; align-items: center;
+    gap: .6rem; cursor: pointer; transition: transform .2s; width: 150px;
+  }
+  .venue-card:hover { transform: translateY(-4px); }
+  .venue-logo-box {
+    
+    border-radius: 6px; display: flex; align-items: center;
+    justify-content: center; padding: 8px; overflow: hidden;
+  }
+  .venue-logo-box .vl {
+    font-family: 'Metal Mania', cursive; color: #111;
+    font-size: .75rem; text-align: center; line-height: 1.2;
+  }
+  .venue-logo-box.dark { background: #1a1a1a; border: 1px solid #333; }
+  .venue-logo-box.dark .vl { color: var(--white); }
+  .venue-name  { font-weight: 500; font-size: .85rem; text-align: center; }
+  .venue-place { color: var(--text-gray); font-size: .75rem; text-align: center; }
+
   /* ── SHOW ACCORDION & VOTING ── */
   .show-chevron {
     display: flex;
