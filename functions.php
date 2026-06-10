@@ -212,6 +212,8 @@ function mm_submit_song_handler() {
         wp_send_json_error( [ 'message' => 'Please enter a song name.' ] );
     }
 
+    $show_id = isset( $_POST['show_id'] ) ? intval( $_POST['show_id'] ) : 0;
+
     $post_id = wp_insert_post( [
         'post_type'   => 'mm_song_suggestion',
         'post_title'  => $song,
@@ -220,6 +222,10 @@ function mm_submit_song_handler() {
 
     if ( is_wp_error( $post_id ) ) {
         wp_send_json_error( [ 'message' => 'Could not save your suggestion.' ] );
+    }
+
+    if ( $show_id > 0 ) {
+        update_post_meta( $post_id, 'show_id', $show_id );
     }
 
     wp_send_json_success( [ 'message' => 'Song suggestion submitted!' ] );
@@ -255,21 +261,30 @@ function mm_submit_votes_handler() {
         wp_send_json_error( [ 'message' => 'reCAPTCHA verification failed. Please try again.' ] );
     }
 
+    // Get show_id
+    $show_id = isset( $_POST['show_id'] ) ? intval( $_POST['show_id'] ) : 0;
+    if ( ! $show_id ) {
+        wp_send_json_error( [ 'message' => 'Invalid show ID.' ] );
+    }
+
     // Get selected songs
     $songs = isset( $_POST['songs'] ) ? array_map( 'sanitize_text_field', (array) $_POST['songs'] ) : [];
     if ( empty( $songs ) || count( $songs ) > 3 ) {
         wp_send_json_error( [ 'message' => 'Please select between 1 and 3 songs.' ] );
     }
 
-    // Increment vote counts
-    $votes = get_option( 'mm_encore_votes', [] );
+    // Increment vote counts for this show
+    $votes = get_post_meta( $show_id, 'mm_encore_votes', true );
+    if ( ! is_array( $votes ) ) {
+        $votes = [];
+    }
     foreach ( $songs as $song ) {
         if ( ! isset( $votes[ $song ] ) ) {
             $votes[ $song ] = 0;
         }
         $votes[ $song ]++;
     }
-    update_option( 'mm_encore_votes', $votes );
+    update_post_meta( $show_id, 'mm_encore_votes', $votes );
 
     // Calculate percentages
     $total = array_sum( $votes );
@@ -292,7 +307,15 @@ add_action( 'wp_ajax_mm_submit_votes',        'mm_submit_votes_handler' );
 add_action( 'wp_ajax_nopriv_mm_submit_votes', 'mm_submit_votes_handler' );
 
 function mm_get_results_handler() {
-    $votes = get_option( 'mm_encore_votes', [] );
+    $show_id = isset( $_POST['show_id'] ) ? intval( $_POST['show_id'] ) : 0;
+    if ( ! $show_id ) {
+        wp_send_json_error( [ 'message' => 'Invalid show ID.' ] );
+    }
+
+    $votes = get_post_meta( $show_id, 'mm_encore_votes', true );
+    if ( ! is_array( $votes ) ) {
+        $votes = [];
+    }
     $total = array_sum( $votes );
     $results = [];
 
@@ -311,3 +334,23 @@ function mm_get_results_handler() {
 }
 add_action( 'wp_ajax_mm_get_results',        'mm_get_results_handler' );
 add_action( 'wp_ajax_nopriv_mm_get_results', 'mm_get_results_handler' );
+
+/* ──────────────────────────────────────────────
+   8. Admin Column: Display Show Name for Suggestions
+   ────────────────────────────────────────────── */
+add_filter( 'manage_mm_song_suggestion_posts_columns', function ( $columns ) {
+    $columns['show_id'] = 'For Show';
+    return $columns;
+} );
+
+add_action( 'manage_mm_song_suggestion_posts_custom_column', function ( $column, $post_id ) {
+    if ( 'show_id' === $column ) {
+        $show_id = get_post_meta( $post_id, 'show_id', true );
+        if ( $show_id ) {
+            $show_title = get_the_title( $show_id );
+            echo esc_html( $show_title ? $show_title : 'Show #' . $show_id );
+        } else {
+            echo '—';
+        }
+    }
+}, 10, 2 );

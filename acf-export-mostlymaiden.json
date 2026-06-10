@@ -118,82 +118,6 @@
                 "maxlength": ""
             },
             {
-                "key": "field_mm_encore_title",
-                "label": "Encore Title",
-                "name": "encore_title",
-                "type": "text",
-                "instructions": "Heading for the Encore / Vote section.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "You pick the Encore!",
-                "placeholder": "You pick the Encore!",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
-                "key": "field_mm_encore_description",
-                "label": "Encore Description",
-                "name": "encore_description",
-                "type": "textarea",
-                "instructions": "Body text in the left-hand column of the Encore section. Leave a blank line between paragraphs.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "That's right — pick the 3 songs you want to hear as tonight's encore. We'll play the top choices as selected by you!\n\nVote as many times as you like and feel free to suggest a song that you want to hear next time!",
-                "placeholder": "",
-                "maxlength": "",
-                "rows": 5,
-                "new_lines": ""
-            },
-            {
-                "key": "field_mm_submit_song_label",
-                "label": "Submit Song Label",
-                "name": "submit_song_label",
-                "type": "text",
-                "instructions": "Label shown above the song suggestion input box.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "Submit your Song",
-                "placeholder": "Submit your Song",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
-                "key": "field_mm_song_options",
-                "label": "Song Options (Pick 3)",
-                "name": "song_options",
-                "type": "textarea",
-                "instructions": "One song per line. Each line becomes a radio button option in the Pick 3 column.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "Hellion/Electric Eye \u2013 Judas Priest\nChildren of the Grave \u2013 Black Sabbath\nKilled by Death \u2013 Mot\u00f6rhead\nLet it Go \u2013 Def Leppard\nDoctor Doctor \u2013 UFO\nLooks That Kill \u2013 M\u00f6tley Cr\u00fce\nRocket Queen \u2013 Guns & Roses",
-                "placeholder": "",
-                "maxlength": "",
-                "rows": 8,
-                "new_lines": ""
-            },
-            {
                 "key": "field_mm_footer_logo_text",
                 "label": "Footer Logo Text",
                 "name": "footer_logo_text",
@@ -326,6 +250,82 @@
                 },
                 "default_value": "",
                 "placeholder": "https://"
+            },
+            {
+                "key": "field_mm_encore_title",
+                "label": "Encore Title",
+                "name": "encore_title",
+                "type": "text",
+                "instructions": "Heading for the Encore / Vote section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "You pick the Encore!",
+                "placeholder": "You pick the Encore!",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_encore_description",
+                "label": "Encore Description",
+                "name": "encore_description",
+                "type": "textarea",
+                "instructions": "Body text in the left-hand column of the Encore section. Leave a blank line between paragraphs.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "That's right — pick the 3 songs you want to hear as tonight's encore. We'll play the top choices as selected by you!\n\nVote as many times as you like and feel free to suggest a song that you want to hear next time!",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": 5,
+                "new_lines": ""
+            },
+            {
+                "key": "field_mm_submit_song_label",
+                "label": "Submit Song Label",
+                "name": "submit_song_label",
+                "type": "text",
+                "instructions": "Label shown above the song suggestion input box.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Submit your Song",
+                "placeholder": "Submit your Song",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_song_options",
+                "label": "Song Options (Pick 3)",
+                "name": "song_options",
+                "type": "textarea",
+                "instructions": "One song per line. Each line becomes a radio button option in the Pick 3 column.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Hellion/Electric Eye \u2013 Judas Priest\nChildren of the Grave \u2013 Black Sabbath\nKilled by Death \u2013 Mot\u00f6rhead\nLet it Go \u2013 Def Leppard\nDoctor Doctor \u2013 UFO\nLooks That Kill \u2013 M\u00f6tley Cr\u00fce\nRocket Queen \u2013 Guns & Roses",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": 8,
+                "new_lines": ""
             }
         ],
         "location": [

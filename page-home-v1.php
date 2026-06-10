@@ -184,23 +184,14 @@ get_header();
   }
   .show-row {
     display: grid;
-    grid-template-columns: 1fr 1fr auto auto auto;
+    grid-template-columns: 1.2fr 1fr auto auto auto 30px;
     gap: .5rem 1.5rem; align-items: center;
     padding: .9rem 0; border-bottom: 1px solid #1f1f1f; font-size: .9rem;
-    animation: fadeSlide .5s ease both;
+    cursor: pointer;
   }
   .show-row:hover { background: rgba(255,255,255,.02); }
-  @keyframes fadeSlide {
-    from { opacity:0; transform: translateX(-15px); }
-    to   { opacity:1; transform: translateX(0); }
-  }
-  .show-row:nth-child(2) { animation-delay:.05s; }
-  .show-row:nth-child(3) { animation-delay:.10s; }
-  .show-row:nth-child(4) { animation-delay:.15s; }
-  .show-row:nth-child(5) { animation-delay:.20s; }
-  .show-row:nth-child(6) { animation-delay:.25s; }
-  .show-row:nth-child(7) { animation-delay:.30s; }
   .show-venue { font-weight: 500; color: var(--white); }
+  .show-venue:hover{ color: white; }
   .show-date  { color: var(--text-gray); font-size: .85rem; }
   .show-date-link {
     color: inherit;
@@ -282,83 +273,59 @@ get_header();
     cursor: pointer;
     box-shadow: 0 10px 24px rgba(0,0,0,.35);
   }
-  @media (max-width: 640px) {
-    .show-row { grid-template-columns: 1fr auto; grid-template-rows: auto auto; }
-    .show-time, .show-price { display: none; }
-    .show-venue { grid-column: 1; }
-    .show-date  { grid-column: 1; }
-    .btn-ticket { grid-column: 2; grid-row: 1 / 3; }
-    .hero{min-height: 40vh;background-position: center;}
-    .show-lightbox { padding: 1rem; }
-    .show-lightbox-close {
-      top: -10px;
-      right: -10px;
-      width: 36px;
-      height: 36px;
-    }
-  }
 
-  /* ── REQUEST A SHOW ── */
-  .request {
-    background: var(--mid); padding: 3rem 2rem;
-    text-align: center; border-top: 1px solid #222;
+  /* ── SHOW ACCORDION & VOTING ── */
+  .show-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-gray);
+    transition: color .2s;
   }
-  .request h3 {
-    font-family: 'Oswald', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem);
-    font-weight: 500; letter-spacing: .05em; margin-bottom: .3rem;
+  .show-row:hover .show-chevron {
+    color: var(--white);
   }
-  .request p { color: var(--text-gray); font-size: .9rem; margin-bottom: 0; }
-  .venues-grid {
-    display: flex; flex-wrap: wrap; gap: 1.5rem;
-    justify-content: center; max-width: 980px; margin: 0 auto;
-    align-items: baseline;
-    margin-top: 30px;
+  .show-voting-dropdown {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-in-out;
+    overflow: hidden;
+    background: #121212;
   }
-  .venue-card {
-    display: flex; flex-direction: column; align-items: center;
-    gap: .6rem; cursor: pointer; transition: transform .2s; width: 150px;
+  .show-item.is-open .show-voting-dropdown {
+    grid-template-rows: 1fr;
+    border-bottom: 2px solid var(--red-dark);
   }
-  .venue-card:hover { transform: translateY(-4px); }
-  .venue-logo-box {
-    
-    border-radius: 6px; display: flex; align-items: center;
-    justify-content: center; padding: 8px; overflow: hidden;
+  .show-voting-content {
+    min-height: 0;
   }
-  .venue-logo-box .vl {
-    font-family: 'Metal Mania', cursive; color: #111;
-    font-size: .75rem; text-align: center; line-height: 1.2;
+  .show-voting-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
-  .venue-logo-box.dark { background: #1a1a1a; border: 1px solid #333; }
-  .venue-logo-box.dark .vl { color: var(--white); }
-  .venue-name  { font-weight: 500; font-size: .85rem; text-align: center; }
-  .venue-place { color: var(--text-gray); font-size: .75rem; text-align: center; }
-
-  /* ── ENCORE VOTE ── */
-  .encore {
-    display: grid; grid-template-columns: 1fr 1fr;
-    min-height: 420px; border-top: 3px solid var(--red-dark);
-  }
-  .encore-left {
+  .show-voting-left {
     background: linear-gradient(135deg, #1a0303 0%, #2c0808 100%);
-    padding: 3rem 2.5rem; display: flex; flex-direction: column; gap: 1.2rem;
+    padding: 2.5rem 2rem; display: flex; flex-direction: column; gap: 1.2rem;
   }
-  .encore-right {
+  .show-voting-right {
     background: linear-gradient(135deg, #200404 0%, #370a0a 100%);
-    padding: 3rem 2.5rem; display: flex; flex-direction: column; gap: 1rem;
+    padding: 2.5rem 2rem; display: flex; flex-direction: column; gap: 1rem;
+    border-left: 1px solid rgba(255,255,255,0.05);
   }
-  .encore-right h4 {
+  .show-voting-right h4 {
     font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700;
     letter-spacing: .2em; text-transform: uppercase; text-align: center; margin-bottom: .5rem;
   }
-  .encore-left h3 {
+  .show-voting-left h3 {
     font-family: 'Oswald', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 700; text-transform: uppercase;
   }
-  .encore-left p { font-size: .9rem; color: #e0b0b0; line-height: 1.6; }
-  .encore-left h5 {
+  .show-voting-left p { font-size: .9rem; color: #e0b0b0; line-height: 1.6; }
+  .show-voting-left h5 {
     font-family: 'Oswald', sans-serif; font-size: 1rem;
     letter-spacing: .1em; text-transform: uppercase; margin-top: .5rem;
   }
+
   .vote-input {
     background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
     color: #fff; padding: .75rem 1rem; width: 100%;
@@ -394,6 +361,7 @@ get_header();
   }
   .encore-msg.success { background: rgba(21,90,21,.4); border: 1px solid #2a7a2a; color: #8f8; }
   .encore-msg.error   { background: rgba(140,20,20,.4); border: 1px solid #8b0000; color: #f88; }
+  
   /* Vote results */
   .vote-results { display: flex; flex-direction: column; gap: .6rem; margin-top: .5rem; }
   .vote-bar-row { display: flex; flex-direction: column; gap: .2rem; }
@@ -416,9 +384,36 @@ get_header();
     font-family: 'Oswald', sans-serif; font-size: .8rem; color: var(--text-gray);
     letter-spacing: .05em; text-align: center; margin-bottom: .3rem;
   }
+
   @media (max-width: 640px) {
-    .encore { grid-template-columns: 1fr; }
-    .encore-left, .encore-right { padding: 2rem 1.5rem; }
+    .show-row { 
+      grid-template-columns: 1fr auto auto; 
+      grid-template-rows: auto auto; 
+      gap: .5rem 1rem;
+    }
+    .show-time, .show-price { display: none; }
+    .show-venue { grid-column: 1; }
+    .show-date  { grid-column: 1; }
+    .btn-ticket { grid-column: 2; grid-row: 1 / 3; }
+    .show-chevron { grid-column: 3; grid-row: 1 / 3; }
+    .hero{min-height: 40vh;background-position: center;}
+    .show-lightbox { padding: 1rem; }
+    .show-lightbox-close {
+      top: -10px;
+      right: -10px;
+      width: 36px;
+      height: 36px;
+    }
+    .show-voting-grid {
+      grid-template-columns: 1fr;
+    }
+    .show-voting-left, .show-voting-right {
+      padding: 1.5rem 1rem;
+    }
+    .show-voting-right {
+      border-left: none;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
   }
 
   .show-venue:hover{
@@ -522,26 +517,89 @@ $default_shows = [
 
     <?php while ( $shows_query->have_posts() ) : $shows_query->the_post(); ?>
       <?php
+        $show_id     = get_the_ID();
         $show_venue  = get_the_title();
         $show_date   = function_exists('get_field') ? get_field('show_date')       : '';
         $show_time   = function_exists('get_field') ? get_field('show_time')       : '';
         $show_price  = function_exists('get_field') ? get_field('show_price')      : '';
         $show_url    = function_exists('get_field') ? get_field('show_ticket_url') : '';
+
+        // Fetch show-specific voting fields
+        $encore_title       = function_exists('get_field') ? get_field('encore_title', $show_id) : '';
+        $encore_description = function_exists('get_field') ? get_field('encore_description', $show_id) : '';
+        $submit_song_label  = function_exists('get_field') ? get_field('submit_song_label', $show_id) : '';
+        $raw_songs          = function_exists('get_field') ? get_field('song_options', $show_id) : '';
+
+        // Fallbacks
+        if ( ! $encore_title ) $encore_title = 'You pick the Encore!';
+        if ( ! $encore_description ) {
+            $encore_description = "That's right — pick the 3 songs you want to hear as tonight's encore. We'll play the top choices as selected by you!\n\nVote as many times as you like and feel free to suggest a song that you want to hear next time!";
+        }
+        if ( ! $submit_song_label ) $submit_song_label = 'Submit your Song';
+        if ( ! $raw_songs ) {
+            $raw_songs = "Hellion/Electric Eye – Judas Priest\nChildren of the Grave – Black Sabbath\nKilled by Death – Motörhead\nLet it Go – Def Leppard\nDoctor Doctor – UFO\nLooks That Kill – Mötley Crüe\nRocket Queen – Guns & Roses";
+        }
+
+        $songs = array_filter( array_map( 'trim', explode( "\n", $raw_songs ) ) );
+        $desc_paragraphs = array_filter( array_map( 'trim', preg_split( '/\n{2,}/', $encore_description ) ) );
       ?>
-      <div class="show-row">
-        <a href="https://www.magicroomnorwood.com/" target="_blank" class="show-venue"><?php echo esc_html( $show_venue ); ?></a>
-        <div class="show-date">
-          <button class="show-date-link" type="button" data-show-lightbox-trigger>
-            <?php echo esc_html( $show_date ); ?>
-          </button>
+      <div class="show-item" data-show-id="<?php echo esc_attr( $show_id ); ?>">
+        <div class="show-row">
+          <a href="https://www.magicroomnorwood.com/" target="_blank" class="show-venue"><?php echo esc_html( $show_venue ); ?></a>
+          <div class="show-date">
+            <button class="show-date-link" type="button" data-show-lightbox-trigger>
+              <?php echo esc_html( $show_date ); ?>
+            </button>
+          </div>
+          <div class="show-time"><?php echo esc_html( $show_time ); ?></div>
+          <div class="show-price"><?php echo wp_kses_post( $show_price ); ?></div>
+          <?php if ( $show_url ) : ?>
+            <a class="btn-ticket" href="<?php echo esc_url( $show_url ); ?>" target="_blank" rel="noopener">Tickets</a>
+          <?php else : ?>
+            <button class="btn-ticket" type="button">Tickets</button>
+          <?php endif; ?>
+          <div class="show-chevron">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon" style="width: 16px; height: 16px; transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
         </div>
-        <div class="show-time"><?php echo esc_html( $show_time ); ?></div>
-        <div class="show-price"><?php echo wp_kses_post( $show_price ); ?></div>
-        <?php if ( $show_url ) : ?>
-          <a class="btn-ticket" href="<?php echo esc_url( $show_url ); ?>" target="_blank" rel="noopener">Tickets</a>
-        <?php else : ?>
-          <button class="btn-ticket" type="button">Tickets</button>
-        <?php endif; ?>
+
+        <div class="show-voting-dropdown">
+          <div class="show-voting-content">
+            <div class="show-voting-grid">
+              <!-- Left: Submit Song -->
+              <div class="show-voting-left">
+                <h3><?php echo esc_html( $encore_title ); ?></h3>
+                <?php foreach ( $desc_paragraphs as $para ) : ?>
+                  <p><?php echo esc_html( $para ); ?></p>
+                <?php endforeach; ?>
+                <h5><?php echo esc_html( $submit_song_label ); ?></h5>
+                <form class="mm-song-form" autocomplete="off">
+                  <input class="vote-input" type="text" name="song" placeholder="Enter a song or artist…" required>
+                  <button class="btn-submit" type="submit">Submit</button>
+                  <div class="song-msg"></div>
+                </form>
+              </div>
+
+              <!-- Right: Pick 3 -->
+              <div class="show-voting-right">
+                <h4 class="mm-vote-title">Pick 3</h4>
+                <form class="mm-vote-form">
+                  <div class="pick-counter">Selected: <span class="pick-count">0</span> / 3</div>
+                  <?php foreach ( $songs as $i => $song ) : ?>
+                  <label class="song-option">
+                    <input type="checkbox" name="songs[]" value="<?php echo esc_attr( $song ); ?>">
+                    <span class="check-dot"></span>
+                    <?php echo esc_html( $song ); ?>
+                  </label>
+                  <?php endforeach; ?>
+                  <button class="btn-submit full" type="submit" style="margin-top:auto;">Submit Vote</button>
+                  <div class="vote-msg"></div>
+                </form>
+                <div class="mm-vote-results vote-results" style="display:none;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     <?php endwhile; wp_reset_postdata(); ?>
 
@@ -667,69 +725,6 @@ $default_venues = [
 
 <?php
 /* ================================================================
-   ENCORE / VOTE
-   ACF fields (on this page):
-     encore_title       — Text
-     encore_description — Textarea  (double blank line = paragraph)
-     submit_song_label  — Text
-     song_options       — Textarea  (one song per line)
-   ================================================================ */
-
-$encore_title       = mm_field( 'encore_title',       'You pick the Encore!' );
-$encore_description = mm_field( 'encore_description',
-    "That's right — pick the 3 songs you want to hear as tonight's encore. We'll play the top choices as selected by you!\n\nVote as many times as you like and feel free to suggest a song that you want to hear next time!"
-);
-$submit_song_label  = mm_field( 'submit_song_label',  'Submit your Song' );
-
-// One song per line textarea
-$raw_songs = mm_field( 'song_options',
-    "Hellion/Electric Eye – Judas Priest\nChildren of the Grave – Black Sabbath\nKilled by Death – Motörhead\nLet it Go – Def Leppard\nDoctor Doctor – UFO\nLooks That Kill – Mötley Crüe\nRocket Queen – Guns & Roses"
-);
-$songs = array_filter( array_map( 'trim', explode( "\n", $raw_songs ) ) );
-
-// Paragraphs: split on double newline
-$desc_paragraphs = array_filter( array_map( 'trim', preg_split( '/\n{2,}/', $encore_description ) ) );
-?>
-
-<!-- ENCORE VOTE -->
-<section class="encore" id="vote">
-
-  <!-- Left: Submit Song -->
-  <div class="encore-left">
-    <h3><?php echo esc_html( $encore_title ); ?></h3>
-    <?php foreach ( $desc_paragraphs as $para ) : ?>
-      <p><?php echo esc_html( $para ); ?></p>
-    <?php endforeach; ?>
-    <h5><?php echo esc_html( $submit_song_label ); ?></h5>
-    <form id="mm-song-form" autocomplete="off">
-      <input class="vote-input" type="text" name="song" placeholder="Enter a song or artist…" required>
-      <button class="btn-submit" type="submit">Submit</button>
-      <div id="song-msg"></div>
-    </form>
-  </div>
-
-  <!-- Right: Pick 3 -->
-  <div class="encore-right">
-    <h4 id="mm-vote-title">Pick 3</h4>
-    <form id="mm-vote-form">
-      <div class="pick-counter">Selected: <span id="pick-count">0</span> / 3</div>
-      <?php foreach ( $songs as $i => $song ) : ?>
-      <label class="song-option">
-        <input type="checkbox" name="songs[]" value="<?php echo esc_attr( $song ); ?>">
-        <span class="check-dot"></span>
-        <?php echo esc_html( $song ); ?>
-      </label>
-      <?php endforeach; ?>
-      <button class="btn-submit full" type="submit" style="margin-top:auto;">Submit Vote</button>
-      <div id="vote-msg"></div>
-    </form>
-    <div id="mm-vote-results" class="vote-results" style="display:none;"></div>
-  </div>
-
-</section>
-
-<?php
-/* ================================================================
    MERCH — Hidden (future WooCommerce integration)
    To enable: remove the comment wrappers below and build out
    the WooCommerce product query.
@@ -765,33 +760,19 @@ $desc_paragraphs = array_filter( array_map( 'trim', preg_split( '/\n{2,}/', $enc
     observer.observe(row);
   });
 
-  // Venue click — request show
-  // document.querySelectorAll('.venue-card').forEach(v => {
-  //   v.addEventListener('click', () => {
-  //     alert('Show request submitted for ' + v.querySelector('.venue-name').textContent + '!');
-  //   });
-  // });
-
-  /* ── Encore Vote: checkbox limit ── */
-  const voteForm     = document.getElementById('mm-vote-form');
-  const pickCount    = document.getElementById('pick-count');
-  if (voteForm) {
-    const checkboxes = voteForm.querySelectorAll('input[type=checkbox][name="songs[]"]');
-    checkboxes.forEach(cb => {
-      cb.addEventListener('change', () => {
-        const checked = voteForm.querySelectorAll('input[type=checkbox][name="songs[]"]:checked');
-        pickCount.textContent = checked.length;
-        checkboxes.forEach(c => {
-          const label = c.closest('.song-option');
-          if (!c.checked && checked.length >= 3) {
-            label.classList.add('disabled');
-          } else {
-            label.classList.remove('disabled');
-          }
-        });
-      });
+  // Toggle dropdown panel
+  document.querySelectorAll('.show-row').forEach(row => {
+    row.addEventListener('click', (e) => {
+      // Don't toggle if clicking links or buttons or lightbox triggers
+      if (e.target.closest('a') || e.target.closest('button') || e.target.closest('[data-show-lightbox-trigger]')) {
+        return;
+      }
+      const showItem = row.closest('.show-item');
+      if (showItem) {
+        showItem.classList.toggle('is-open');
+      }
     });
-  }
+  });
 
   /* ── reCAPTCHA v3 helper ── */
   const RECAPTCHA_SITE_KEY = '6LeFcHEsAAAAACqVvFAs0AKICs_9EKp3v_vbzTPi';
@@ -799,175 +780,205 @@ $desc_paragraphs = array_filter( array_map( 'trim', preg_split( '/\n{2,}/', $enc
     return grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: action });
   }
 
-  /* ── Song Suggestion Form ── */
-  const songForm = document.getElementById('mm-song-form');
-  if (songForm) {
-    songForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn     = songForm.querySelector('.btn-submit');
-      const msgDiv  = document.getElementById('song-msg');
-      const songVal = songForm.querySelector('input[name=song]').value.trim();
+  // Initialize per-show voting and song submission logic
+  document.querySelectorAll('.show-item').forEach(showItem => {
+    const showId = showItem.dataset.showId;
+    const songForm = showItem.querySelector('.mm-song-form');
+    const voteForm = showItem.querySelector('.mm-vote-form');
+    const voteTitle = showItem.querySelector('.mm-vote-title');
+    const pickCount = showItem.querySelector('.pick-count');
+    const checkboxes = voteForm ? voteForm.querySelectorAll('input[type=checkbox][name="songs[]"]') : [];
+    const voteResults = showItem.querySelector('.mm-vote-results');
 
-      msgDiv.innerHTML = '';
-      if (!songVal) { showMsg(msgDiv, 'Please enter a song name.', 'error'); return; }
-
-      btn.disabled = true;
-      btn.textContent = 'Submitting…';
-
-      getRecaptchaToken('submit_song').then(token => {
-        return fetch(MM_AJAX_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({
-            action: 'mm_submit_song',
-            nonce: MM_NONCE,
-            recaptcha: token,
-            song: songVal
-          })
+    // Handle check limit (up to 3)
+    if (voteForm) {
+      checkboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+          const checked = voteForm.querySelectorAll('input[type=checkbox][name="songs[]"]:checked');
+          if (pickCount) pickCount.textContent = checked.length;
+          checkboxes.forEach(c => {
+            const label = c.closest('.song-option');
+            if (!c.checked && checked.length >= 3) {
+              label.classList.add('disabled');
+            } else {
+              label.classList.remove('disabled');
+            }
+          });
         });
-      })
-      .then(r => r.json())
-      .then(res => {
-        if (res.success) {
-          showMsg(msgDiv, res.data.message, 'success');
-          songForm.querySelector('input[name=song]').value = '';
-        } else {
-          showMsg(msgDiv, res.data.message || 'Submission failed.', 'error');
-        }
-        btn.disabled = false;
-        btn.textContent = 'Submit';
-      })
-      .catch(() => {
-        showMsg(msgDiv, 'Network error. Please try again.', 'error');
-        btn.disabled = false;
-        btn.textContent = 'Submit';
       });
-    });
-  }
-
-  /* ── Vote Form ── */
-  const hasVoted = localStorage.getItem('mm_voted');
-  const voteTitle = document.getElementById('mm-vote-title');
-
-  // If already voted, load results immediately and hide form
-  if (hasVoted && voteForm) {
-    hideVoteForm();
-    const cachedResults = localStorage.getItem('mm_vote_results');
-    if (cachedResults) {
-      try {
-        renderResults(JSON.parse(cachedResults));
-      } catch (_) {}
     }
-    loadResults();
-  }
 
-  if (voteForm) {
-    voteForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (localStorage.getItem('mm_voted')) {
-        showMsg(document.getElementById('vote-msg'), 'You have already voted!', 'error');
-        return;
+    // Helper to hide form
+    function hideVoteForm() {
+      if (voteForm) voteForm.style.display = 'none';
+      if (voteTitle) voteTitle.style.display = 'none';
+    }
+
+    // Helper to show msg
+    function showMsg(el, text, type) {
+      el.innerHTML = '<div class="encore-msg ' + type + '">' + text + '</div>';
+    }
+
+    // Helper to render results
+    function renderResults(results) {
+      if (!voteResults) return;
+      let html = '<h4 style="margin-bottom:.5rem;">Current Results</h4>';
+      for (const [song, data] of Object.entries(results)) {
+        html += `<div class="vote-bar-row">
+          <div class="vote-bar-label"><span>${escHtml(song)}</span><span>${data.votes} vote${data.votes!==1?'s':''}</span></div>
+          <div class="vote-bar-track">
+            <div class="vote-bar-fill" data-pct="${data.percent}"></div>
+            <span class="vote-bar-pct">${data.percent}%</span>
+          </div>
+        </div>`;
       }
-      const btn    = voteForm.querySelector('.btn-submit');
-      const msgDiv = document.getElementById('vote-msg');
-      const checked = voteForm.querySelectorAll('input[type=checkbox][name="songs[]"]:checked');
-      const songs  = Array.from(checked).map(c => c.value);
-
-      msgDiv.innerHTML = '';
-      if (songs.length === 0) { showMsg(msgDiv, 'Please select at least one song.', 'error'); return; }
-
-      btn.disabled = true;
-      btn.textContent = 'Submitting…';
-
-      getRecaptchaToken('submit_vote').then(token => {
-        const params = new URLSearchParams();
-        params.append('action', 'mm_submit_votes');
-        params.append('nonce', MM_NONCE);
-        params.append('recaptcha', token);
-        songs.forEach(s => params.append('songs[]', s));
-
-        return fetch(MM_AJAX_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: params
+      voteResults.innerHTML = html;
+      voteResults.style.display = 'flex';
+      // Animate bars
+      requestAnimationFrame(() => {
+        voteResults.querySelectorAll('.vote-bar-fill').forEach(bar => {
+          bar.style.width = bar.dataset.pct + '%';
         });
+      });
+    }
+
+    function escHtml(str) {
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    // Check localStorage
+    const hasVoted = localStorage.getItem('mm_voted_' + showId);
+    if (hasVoted) {
+      hideVoteForm();
+      const cachedResults = localStorage.getItem('mm_vote_results_' + showId);
+      if (cachedResults) {
+        try {
+          renderResults(JSON.parse(cachedResults));
+        } catch (_) {}
+      }
+      loadResults();
+    }
+
+    function loadResults() {
+      fetch(MM_AJAX_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ action: 'mm_get_results', show_id: showId })
       })
       .then(r => r.json())
       .then(res => {
-        if (res.success) {
-          showMsg(msgDiv, res.data.message, 'success');
+        if (res.success && res.data.results && Object.keys(res.data.results).length > 0) {
           renderResults(res.data.results);
-          localStorage.setItem('mm_voted', '1');
-          localStorage.setItem('mm_vote_results', JSON.stringify(res.data.results || {}));
-          hideVoteForm();
-        } else {
-          showMsg(msgDiv, res.data.message || 'Vote failed.', 'error');
         }
-        btn.disabled = false;
-        btn.textContent = 'Submit Vote';
       })
-      .catch(() => {
-        showMsg(msgDiv, 'Network error. Please try again.', 'error');
-        btn.disabled = false;
-        btn.textContent = 'Submit Vote';
-      });
-    });
-  }
-
-  function hideVoteForm() {
-    if (!voteForm) return;
-    voteForm.style.display = 'none';
-    if (voteTitle) voteTitle.style.display = 'none';
-  }
-
-  function loadResults() {
-    fetch(MM_AJAX_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ action: 'mm_get_results' })
-    })
-    .then(r => r.json())
-    .then(res => {
-      if (res.success && res.data.results && Object.keys(res.data.results).length > 0) {
-        renderResults(res.data.results);
-      }
-    })
-    .catch(() => {});
-  }
-
-  /* ── Helpers ── */
-  function showMsg(el, text, type) {
-    el.innerHTML = '<div class="encore-msg ' + type + '">' + text + '</div>';
-  }
-
-  function renderResults(results) {
-    const container = document.getElementById('mm-vote-results');
-    if (!container) return;
-    let html = '<h4 style="margin-bottom:.5rem;">Current Results</h4>';
-    for (const [song, data] of Object.entries(results)) {
-      html += `<div class="vote-bar-row">
-        <div class="vote-bar-label"><span>${escHtml(song)}</span><span>${data.votes} vote${data.votes!==1?'s':''}</span></div>
-        <div class="vote-bar-track">
-          <div class="vote-bar-fill" data-pct="${data.percent}"></div>
-          <span class="vote-bar-pct">${data.percent}%</span>
-        </div>
-      </div>`;
+      .catch(() => {});
     }
-    container.innerHTML = html;
-    container.style.display = 'flex';
-    // Animate bars
-    requestAnimationFrame(() => {
-      container.querySelectorAll('.vote-bar-fill').forEach(bar => {
-        bar.style.width = bar.dataset.pct + '%';
-      });
-    });
-  }
 
-  function escHtml(str) {
-    const d = document.createElement('div');
-    d.textContent = str;
-    return d.innerHTML;
-  }
+    // Submit Song Form
+    if (songForm) {
+      songForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn     = songForm.querySelector('.btn-submit');
+        const msgDiv  = showItem.querySelector('.song-msg');
+        const songVal = songForm.querySelector('input[name=song]').value.trim();
+
+        if (!msgDiv) return;
+        msgDiv.innerHTML = '';
+        if (!songVal) { showMsg(msgDiv, 'Please enter a song name.', 'error'); return; }
+
+        btn.disabled = true;
+        btn.textContent = 'Submitting…';
+
+        getRecaptchaToken('submit_song').then(token => {
+          return fetch(MM_AJAX_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+              action: 'mm_submit_song',
+              nonce: MM_NONCE,
+              recaptcha: token,
+              song: songVal,
+              show_id: showId
+            })
+          });
+        })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            showMsg(msgDiv, res.data.message, 'success');
+            songForm.querySelector('input[name=song]').value = '';
+          } else {
+            showMsg(msgDiv, res.data.message || 'Submission failed.', 'error');
+          }
+          btn.disabled = false;
+          btn.textContent = 'Submit';
+        })
+        .catch(() => {
+          showMsg(msgDiv, 'Network error. Please try again.', 'error');
+          btn.disabled = false;
+          btn.textContent = 'Submit';
+        });
+      });
+    }
+
+    // Submit Vote Form
+    if (voteForm) {
+      voteForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (localStorage.getItem('mm_voted_' + showId)) {
+          showMsg(showItem.querySelector('.vote-msg'), 'You have already voted for this show!', 'error');
+          return;
+        }
+        const btn    = voteForm.querySelector('.btn-submit');
+        const msgDiv = showItem.querySelector('.vote-msg');
+        const checked = voteForm.querySelectorAll('input[type=checkbox][name="songs[]"]:checked');
+        const songs  = Array.from(checked).map(c => c.value);
+
+        if (!msgDiv) return;
+        msgDiv.innerHTML = '';
+        if (songs.length === 0) { showMsg(msgDiv, 'Please select at least one song.', 'error'); return; }
+
+        btn.disabled = true;
+        btn.textContent = 'Submitting…';
+
+        getRecaptchaToken('submit_vote').then(token => {
+          const params = new URLSearchParams();
+          params.append('action', 'mm_submit_votes');
+          params.append('nonce', MM_NONCE);
+          params.append('recaptcha', token);
+          params.append('show_id', showId);
+          songs.forEach(s => params.append('songs[]', s));
+
+          return fetch(MM_AJAX_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params
+          });
+        })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            showMsg(msgDiv, res.data.message, 'success');
+            renderResults(res.data.results);
+            localStorage.setItem('mm_voted_' + showId, '1');
+            localStorage.setItem('mm_vote_results_' + showId, JSON.stringify(res.data.results || {}));
+            hideVoteForm();
+          } else {
+            showMsg(msgDiv, res.data.message || 'Vote failed.', 'error');
+          }
+          btn.disabled = false;
+          btn.textContent = 'Submit Vote';
+        })
+        .catch(() => {
+          showMsg(msgDiv, 'Network error. Please try again.', 'error');
+          btn.disabled = false;
+          btn.textContent = 'Submit Vote';
+        });
+      });
+    }
+  });
 
   const showLightbox = document.getElementById('show-lightbox');
   const showLightboxDialog = showLightbox ? showLightbox.querySelector('.show-lightbox-dialog') : null;
