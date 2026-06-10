@@ -435,13 +435,31 @@ $hero_subtitle = mm_field( 'hero_subtitle', 'The Iron Maiden Experience' );
 // Comma-separated tags → array
 $hero_logo  = mm_field( 'hero_logo' );
 $hero_background = mm_field( 'hero_background' );
+
+// Helper to extract image URL & alt safely
+if ( ! function_exists( 'mm_get_image_data' ) ) {
+    function mm_get_image_data( $img ) {
+        $url = '';
+        $alt = '';
+        if ( is_array( $img ) ) {
+            $url = isset( $img['url'] ) ? $img['url'] : '';
+            $alt = isset( $img['alt'] ) ? $img['alt'] : '';
+        } elseif ( is_string( $img ) ) {
+            $url = $img;
+        }
+        return [ 'url' => $url, 'alt' => $alt ];
+    }
+}
+
+$hero_bg_data   = mm_get_image_data( $hero_background );
+$hero_logo_data = mm_get_image_data( $hero_logo );
 ?>
 
 <!-- HERO -->
-<section class="hero" id="band" style="background-image: url('<?php echo esc_url( $hero_background['url'] ); ?>');">
+<section class="hero" id="band" <?php if ( ! empty( $hero_bg_data['url'] ) ) : ?>style="background-image: url('<?php echo esc_url( $hero_bg_data['url'] ); ?>');"<?php endif; ?>>
   <div class="hero-logo-wrap">
-    <?php if($hero_logo) : ?>
-    <img width="500" src="<?php echo esc_url( $hero_logo['url'] ); ?>" alt="<?php echo esc_attr( $hero_logo['alt'] ); ?>">
+    <?php if ( ! empty( $hero_logo_data['url'] ) ) : ?>
+      <img width="500" src="<?php echo esc_url( $hero_logo_data['url'] ); ?>" alt="<?php echo esc_attr( $hero_logo_data['alt'] ); ?>">
     <?php endif; ?>
   </div>
 </section>
@@ -464,8 +482,11 @@ $about_text = mm_field( 'about_text', $about_default );
 <section class="stage" id="epk">
   <?php
   $stage_visual = mm_field( 'stage_visual' );
+  $stage_visual_data = mm_get_image_data( $stage_visual );
+  if ( ! empty( $stage_visual_data['url'] ) ) :
   ?>
-  <img style="width: 100%;" src="<?php echo esc_url( $stage_visual['url'] ); ?>" alt="<?php echo esc_attr( $stage_visual['alt'] ); ?>">
+    <img style="width: 100%;" src="<?php echo esc_url( $stage_visual_data['url'] ); ?>" alt="<?php echo esc_attr( $stage_visual_data['alt'] ); ?>">
+  <?php endif; ?>
 </section>
 
 <?php
