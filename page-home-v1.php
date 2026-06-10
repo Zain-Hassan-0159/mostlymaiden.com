@@ -479,7 +479,10 @@ if ( ! function_exists( 'mm_get_image_data' ) ) {
         if ( is_array( $img ) ) {
             $url = isset( $img['url'] ) ? $img['url'] : '';
             $alt = isset( $img['alt'] ) ? $img['alt'] : '';
-        } elseif ( is_string( $img ) ) {
+        } elseif ( is_numeric( $img ) ) {
+            $url = wp_get_attachment_url( intval( $img ) );
+            $alt = get_post_meta( intval( $img ), '_wp_attachment_image_alt', true );
+        } elseif ( is_string( $img ) && ! empty( $img ) ) {
             $url = $img;
         }
         return [ 'url' => $url, 'alt' => $alt ];
