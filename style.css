@@ -1,0 +1,115 @@
+/*
+Theme Name: Hello Elementor Child
+Theme URI: https://elementor.com/hello-theme/
+Description: Child theme for Hello Elementor
+Author: Zain Hassan
+Template: hello-elementor
+Version: 1.0.0
+Text Domain: hello-elementor-child
+*/
+
+body{
+  background-color: #070707;
+}
+
+main{
+  color: white;
+  padding: 100px 0;
+}
+
+:root {
+  --red: #cc1818;
+  --red-dark: #8b0000;
+  --white: #f0eee8;
+  --text-gray: #aaa;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, .85) 0%, transparent 100%);
+}
+
+.admin-bar nav {
+  top: 32px;
+}
+
+nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-family: 'Oswald', sans-serif;
+  font-size: .8rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  transition: color .2s;
+}
+
+nav a:hover {
+  color: var(--red);
+}
+
+footer {
+  background: #070707;
+  border-top: 2px solid var(--red-dark);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  color: var(--text-gray);
+  font-size: .8rem;
+  letter-spacing: .08em;
+}
+
+footer .footer-logo {
+  margin-bottom: .5rem;
+}
+
+footer .footer-logo img {
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+}
+
+footer .footer-logo span {
+  font-family: 'Metal Mania', cursive;
+  font-size: 1.8rem;
+  color: var(--white);
+  text-shadow: 0 0 12px rgba(100, 180, 255, .4);
+}
+
+footer .footer-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+footer .footer-links a {
+  color: var(--text-gray);
+  text-decoration: none;
+  font-family: 'Oswald', sans-serif;
+  font-size: .75rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  transition: color .2s;
+}
+
+footer .footer-links a:hover {
+  color: var(--red);
+}
+
+footer .footer-links svg {
+  width: 24px;
+  fill: indianred;
+}
+
+.woocommerce:where(body:not(.woocommerce-uses-block-theme)) .woocommerce-breadcrumb{
+  display: none;
+}

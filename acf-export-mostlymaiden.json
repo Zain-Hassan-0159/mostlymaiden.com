@@ -1,0 +1,429 @@
+[
+    {
+        "key": "group_mm_homev1",
+        "title": "Home Page V1",
+        "fields": [
+            {
+                "key": "field_mm_hero_subtitle",
+                "label": "Hero Subtitle",
+                "name": "hero_subtitle",
+                "type": "text",
+                "instructions": "Tagline shown beneath the band name in the hero section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "The Iron Maiden Experience",
+                "placeholder": "The Iron Maiden Experience",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_hero_tags",
+                "label": "Hero Tags",
+                "name": "hero_tags",
+                "type": "text",
+                "instructions": "Comma-separated tags shown below the subtitle. Example: All Live, No Tracks",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "All Live, No Tracks",
+                "placeholder": "All Live, No Tracks",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_about_text",
+                "label": "About Text",
+                "name": "about_text",
+                "type": "wysiwyg",
+                "instructions": "Band description paragraph in the About section. You can use bold text.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "basic",
+                "media_upload": 0,
+                "delay": 0
+            },
+            {
+                "key": "field_mm_booking_banner_text",
+                "label": "Booking Banner Text",
+                "name": "booking_banner_text",
+                "type": "text",
+                "instructions": "Large announcement text shown in the booking banner strip.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Now Booking Summer/Fall 2026",
+                "placeholder": "Now Booking Summer/Fall 2026",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_request_title",
+                "label": "Request Section Title",
+                "name": "request_title",
+                "type": "text",
+                "instructions": "Heading for the Request a Show section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Request a show near you!",
+                "placeholder": "Request a show near you!",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_request_subtitle",
+                "label": "Request Section Subtitle",
+                "name": "request_subtitle",
+                "type": "text",
+                "instructions": "Sub-text shown below the Request section title.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Click on the venue below to request a show",
+                "placeholder": "Click on the venue below to request a show",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_encore_title",
+                "label": "Encore Title",
+                "name": "encore_title",
+                "type": "text",
+                "instructions": "Heading for the Encore / Vote section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "You pick the Encore!",
+                "placeholder": "You pick the Encore!",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_encore_description",
+                "label": "Encore Description",
+                "name": "encore_description",
+                "type": "textarea",
+                "instructions": "Body text in the left-hand column of the Encore section. Leave a blank line between paragraphs.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "That's right — pick the 3 songs you want to hear as tonight's encore. We'll play the top choices as selected by you!\n\nVote as many times as you like and feel free to suggest a song that you want to hear next time!",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": 5,
+                "new_lines": ""
+            },
+            {
+                "key": "field_mm_submit_song_label",
+                "label": "Submit Song Label",
+                "name": "submit_song_label",
+                "type": "text",
+                "instructions": "Label shown above the song suggestion input box.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Submit your Song",
+                "placeholder": "Submit your Song",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_song_options",
+                "label": "Song Options (Pick 3)",
+                "name": "song_options",
+                "type": "textarea",
+                "instructions": "One song per line. Each line becomes a radio button option in the Pick 3 column.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Hellion/Electric Eye \u2013 Judas Priest\nChildren of the Grave \u2013 Black Sabbath\nKilled by Death \u2013 Mot\u00f6rhead\nLet it Go \u2013 Def Leppard\nDoctor Doctor \u2013 UFO\nLooks That Kill \u2013 M\u00f6tley Cr\u00fce\nRocket Queen \u2013 Guns & Roses",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": 8,
+                "new_lines": ""
+            },
+            {
+                "key": "field_mm_footer_logo_text",
+                "label": "Footer Logo Text",
+                "name": "footer_logo_text",
+                "type": "text",
+                "instructions": "Band name displayed in the footer logo.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "M\u00f6stly Maiden",
+                "placeholder": "M\u00f6stly Maiden",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_footer_copyright",
+                "label": "Footer Copyright",
+                "name": "footer_copyright",
+                "type": "text",
+                "instructions": "Copyright line displayed at the bottom of the footer.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "\u00a9 2026 M\u00f6stly Maiden \u2013 The Iron Maiden Experience. All rights reserved.",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-home-v1.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "All ACF fields for the Home Page V1 custom template."
+    },
+    {
+        "key": "group_mm_show_details",
+        "title": "Show Details",
+        "fields": [
+            {
+                "key": "field_mm_show_date",
+                "label": "Date",
+                "name": "show_date",
+                "type": "text",
+                "instructions": "Display date, e.g. Saturday, July 17, 2026",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "Saturday, July 17, 2026",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_show_time",
+                "label": "Time",
+                "name": "show_time",
+                "type": "text",
+                "instructions": "Show start time, e.g. 9:00 PM",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "9:00 PM",
+                "placeholder": "9:00 PM",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_show_price",
+                "label": "Price",
+                "name": "show_price",
+                "type": "text",
+                "instructions": "Ticket price info, e.g. $15/Advance  $20/Door",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "$15/Advance  $20/Door",
+                "placeholder": "$15/Advance  $20/Door",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_show_ticket_url",
+                "label": "Ticket URL",
+                "name": "show_ticket_url",
+                "type": "url",
+                "instructions": "Full URL to the ticket purchase page, e.g. https://ticketmaster.com/... Leave blank to show a placeholder button.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "https://"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "mm_show"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Date, time, price, and ticket link for each Show post."
+    },
+    {
+        "key": "group_mm_venue_details",
+        "title": "Venue Details",
+        "fields": [
+            {
+                "key": "field_mm_venue_location",
+                "label": "Location",
+                "name": "venue_location",
+                "type": "text",
+                "instructions": "City and state shown under the venue card, e.g. New Bedford, MA",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "New Bedford, MA",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_mm_venue_dark",
+                "label": "Dark Logo Box",
+                "name": "venue_dark",
+                "type": "true_false",
+                "instructions": "Enable for venues with a dark/black background logo box.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Use dark background for logo box",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "Dark",
+                "ui_off_text": "Light"
+            },
+            {
+                "key": "field_mm_venue_logo_text",
+                "label": "Logo Box Text",
+                "name": "venue_logo_text",
+                "type": "textarea",
+                "instructions": "Text shown inside the venue logo box. Use a new line for a line break (e.g. THE on line 1, VAULT on line 2).",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "THE\nVAULT",
+                "maxlength": "",
+                "rows": 3,
+                "new_lines": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "mm_venue"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Location, logo text, and style for each Venue post."
+    }
+]
