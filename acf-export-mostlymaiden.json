@@ -42,6 +42,54 @@
                 "maxlength": ""
             },
             {
+                "key": "field_mm_hero_logo",
+                "label": "Hero Logo",
+                "name": "hero_logo",
+                "type": "image",
+                "instructions": "Logo image displayed in the hero section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_mm_hero_background",
+                "label": "Hero Background",
+                "name": "hero_background",
+                "type": "image",
+                "instructions": "Background image for the hero section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
                 "key": "field_mm_about_text",
                 "label": "About Text",
                 "name": "about_text",
@@ -59,6 +107,30 @@
                 "toolbar": "basic",
                 "media_upload": 0,
                 "delay": 0
+            },
+            {
+                "key": "field_mm_stage_visual",
+                "label": "Stage Visual",
+                "name": "stage_visual",
+                "type": "image",
+                "instructions": "Full-width background image/visual in the EPK stage section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
             },
             {
                 "key": "field_mm_booking_banner_text",
