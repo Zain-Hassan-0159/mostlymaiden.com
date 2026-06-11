@@ -582,6 +582,7 @@ $default_shows = [
         $show_time   = function_exists('get_field') ? get_field('show_time')       : '';
         $show_price  = function_exists('get_field') ? get_field('show_price')      : '';
         $show_url    = function_exists('get_field') ? get_field('show_ticket_url') : '';
+        $show_venue_url = function_exists('get_field') ? get_field('show_venue_url') : '';
 
         // Fetch show-specific voting fields
         $encore_title       = function_exists('get_field') ? get_field('encore_title', $show_id) : '';
@@ -604,7 +605,11 @@ $default_shows = [
       ?>
       <div class="show-item" data-show-id="<?php echo esc_attr( $show_id ); ?>">
         <div class="show-row">
-          <a href="https://www.magicroomnorwood.com/" target="_blank" class="show-venue"><?php echo esc_html( $show_venue ); ?></a>
+          <?php if ( $show_venue_url ) : ?>
+            <a href="<?php echo esc_url( $show_venue_url ); ?>" target="_blank" class="show-venue"><?php echo esc_html( $show_venue ); ?></a>
+          <?php else : ?>
+            <span class="show-venue"><?php echo esc_html( $show_venue ); ?></span>
+          <?php endif; ?>
           <div class="show-date">
             <button class="show-date-link" type="button" data-show-lightbox-trigger>
               <?php echo esc_html( $show_date ); ?>
