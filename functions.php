@@ -381,3 +381,112 @@ add_action( 'manage_mm_song_suggestion_posts_custom_column', function ( $column,
         }
     }
 }, 10, 2 );
+
+/* ──────────────────────────────────────────────
+   9. Admin Columns & Metabox: Show Voting Details
+   ────────────────────────────────────────────── */
+
+// Add custom column to Shows list view
+add_filter( 'manage_mm_show_posts_columns', function ( $columns ) {
+    $columns['mm_show_votes'] = 'Encore Votes';
+    return $columns;
+} );
+
+// Output top 3 voted songs in Shows list column
+add_action( 'manage_mm_show_posts_custom_column', function ( $column, $post_id ) {
+    if ( 'mm_show_votes' === $column ) {
+        $votes = get_post_meta( $post_id, 'mm_encore_votes', true );
+        if ( ! empty( $votes ) && is_array( $votes ) ) {
+            arsort( $votes );
+            $top_3 = array_slice( $votes, 0, 3, true );
+            $summary = [];
+            foreach ( $top_3 as $song => $count ) {
+                $summary[] = esc_html( $song ) . ' (' . intval( $count ) . ')';
+            }
+            echo implode( '<br>', $summary );
+            if ( count( $votes ) > 3 ) {
+                echo '<br><span style="color: #888; font-size: 11px;">+' . ( count( $votes ) - 3 ) . ' more...</span>';
+            }
+        } else {
+            echo '<span style="color: #aaa;">No votes yet</span>';
+        }
+    }
+}, 10, 2 );
+
+// Register the Encore Votes Meta Box on Edit Show screen
+add_action( 'add_meta_boxes', function () {
+    add_meta_box(
+        'mm_show_votes_meta_box',
+        'Encore Voting Results',
+        'mm_render_show_votes_meta_box',
+        'mm_show',
+        'normal',
+        'high'
+    );
+} );
+
+// Render the metabox content with nice visual percentages and clear action
+function mm_render_show_votes_meta_box( $post ) {
+    $post_id = $post->ID;
+    $votes = get_post_meta( $post_id, 'mm_encore_votes', true );
+    
+    // Process clear action if clicked
+    if ( isset( $_GET['clear_votes'] ) && check_admin_referer( 'mm_clear_votes_nonce', 'clear_votes_nonce' ) ) {
+        delete_post_meta( $post_id, 'mm_encore_votes' );
+        $votes = [];
+        echo '<div class="notice notice-success is-dismissible" style="margin: 0 0 15px 0;"><p>Voting data cleared successfully.</p></div>';
+    }
+
+    if ( empty( $votes ) || ! is_array( $votes ) ) {
+        echo '<p style="margin: 10px 0;">No votes have been submitted for this show yet.</p>';
+        return;
+    }
+
+    arsort( $votes );
+    $total_votes = array_sum( $votes );
+
+    echo '<table class="wp-list-table widefat fixed striped posts" style="margin-top: 10px; border: 1px solid #ccd0d4; box-shadow: none;">';
+    echo '<thead>';
+    echo '<tr>';
+    echo '<th style="font-weight: bold; padding: 10px;">Song / Artist</th>';
+    echo '<th style="font-weight: bold; width: 100px; padding: 10px;">Votes</th>';
+    echo '<th style="font-weight: bold; width: 200px; padding: 10px;">Percentage</th>';
+    echo '</tr>';
+    echo '</thead>';
+    echo '<tbody>';
+
+    foreach ( $votes as $song => $count ) {
+        $pct = $total_votes > 0 ? round( ( $count / $total_votes ) * 100, 1 ) : 0;
+        echo '<tr>';
+        echo '<td style="padding: 8px 10px; font-weight: 500;">' . esc_html( $song ) . '</td>';
+        echo '<td style="padding: 8px 10px; font-size: 14px;"><strong>' . intval( $count ) . '</strong></td>';
+        echo '<td style="padding: 8px 10px; vertical-align: middle;">';
+        echo '<div style="background: #f0f0f1; border-radius: 4px; overflow: hidden; height: 20px; position: relative; border: 1px solid #c3c4c7;">';
+        echo '<div style="background: #2271b1; width: ' . esc_attr( $pct ) . '%; height: 100%;"></div>';
+        echo '<span style="position: absolute; right: 8px; top: 0; font-size: 11px; font-weight: bold; line-height: 20px; color: #3c434a; text-shadow: 0 0 2px #fff;">' . $pct . '%</span>';
+        echo '</div>';
+        echo '</td>';
+        echo '</tr>';
+    }
+
+    echo '</tbody>';
+    echo '<tfoot>';
+    echo '<tr style="font-weight: bold; background: #f6f7f7; border-top: 1px solid #ccd0d4;">';
+    echo '<td style="padding: 10px;">Total Votes</td>';
+    echo '<td style="padding: 10px; font-size: 15px;">' . intval( $total_votes ) . '</td>';
+    echo '<td style="padding: 10px;">100%</td>';
+    echo '</tr>';
+    echo '</tfoot>';
+    echo '</table>';
+
+    // Output secure reset link
+    $clear_url = wp_nonce_url(
+        admin_url( 'post.php?post=' . $post_id . '&action=edit&clear_votes=1' ),
+        'mm_clear_votes_nonce',
+        'clear_votes_nonce'
+    );
+    echo '<p style="margin-top: 20px; text-align: right; margin-bottom: 5px;">';
+    echo '<a href="' . esc_url( $clear_url ) . '" class="button button-link-delete" onclick="return confirm(\'Are you sure you want to delete all voting data for this show? This action cannot be undone.\');" style="color: #b32d2e; text-decoration: none; font-weight: 500;">Clear Voting Data</a>';
+    echo '</p>';
+}
+
