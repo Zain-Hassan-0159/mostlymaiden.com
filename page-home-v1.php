@@ -839,7 +839,8 @@ $default_venues = [
   });
 
   /* ── reCAPTCHA v3 helper ── */
-  const RECAPTCHA_SITE_KEY = '6LeFcHEsAAAAACqVvFAs0AKICs_9EKp3v_vbzTPi';
+  <?php $recaptcha_keys = mm_get_recaptcha_keys(); ?>
+  const RECAPTCHA_SITE_KEY = <?php echo wp_json_encode( $recaptcha_keys['site_key'] ); ?>;
   function getRecaptchaToken(action) {
     return grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: action });
   }

@@ -158,10 +158,27 @@ add_action( 'init', function () {
 /* ──────────────────────────────────────────────
    5. Encore Vote — Enqueue reCAPTCHA + localize AJAX
    ────────────────────────────────────────────── */
+/**
+ * Helper to get reCAPTCHA v3 site and secret keys from homepage ACF fields.
+ */
+if ( ! function_exists( 'mm_get_recaptcha_keys' ) ) {
+    function mm_get_recaptcha_keys() {
+        $home_id = get_option( 'page_on_front' );
+        $site_key   = function_exists( 'get_field' ) ? get_field( 'recaptcha_site_key', $home_id ) : '';
+        $secret_key = function_exists( 'get_field' ) ? get_field( 'recaptcha_secret_key', $home_id ) : '';
+
+        return [
+            'site_key'   => ! empty( $site_key ) ? sanitize_text_field( $site_key ) : '6LeFcHEsAAAAACqVvFAs0AKICs_9EKp3v_vbzTPi',
+            'secret_key' => ! empty( $secret_key ) ? sanitize_text_field( $secret_key ) : '6LeFcHEsAAAAALPJav86cwiwczhQVJwiU8oWRvtB',
+        ];
+    }
+}
+
 add_action( 'wp_enqueue_scripts', function () {
+    $keys = mm_get_recaptcha_keys();
     wp_enqueue_script(
         'google-recaptcha',
-        'https://www.google.com/recaptcha/api.js?render=6LeFcHEsAAAAACqVvFAs0AKICs_9EKp3v_vbzTPi',
+        'https://www.google.com/recaptcha/api.js?render=' . esc_attr( $keys['site_key'] ),
         [],
         null,
         true
@@ -194,16 +211,21 @@ function mm_submit_song_handler() {
         wp_send_json_error( [ 'message' => 'Please complete the reCAPTCHA.' ] );
     }
 
+    $keys = mm_get_recaptcha_keys();
     $verify = wp_remote_post( 'https://www.google.com/recaptcha/api/siteverify', [
         'body' => [
-            'secret'   => '6LeFcHEsAAAAALPJav86cwiwczhQVJwiU8oWRvtB',
+            'secret'   => $keys['secret_key'],
             'response' => $recaptcha_response,
         ],
     ] );
 
     $verify_body = json_decode( wp_remote_retrieve_body( $verify ), true );
     if ( empty( $verify_body['success'] ) || ( isset( $verify_body['score'] ) && $verify_body['score'] < 0.5 ) ) {
-        wp_send_json_error( [ 'message' => 'reCAPTCHA verification failed. Please try again.' ] );
+        $error_msg = 'reCAPTCHA verification failed. Please try again.';
+        if ( isset( $verify_body['error-codes'] ) && is_array( $verify_body['error-codes'] ) ) {
+            $error_msg .= ' (Error: ' . implode( ', ', $verify_body['error-codes'] ) . ')';
+        }
+        wp_send_json_error( [ 'message' => $error_msg ] );
     }
 
     // Save submission
@@ -249,16 +271,21 @@ function mm_submit_votes_handler() {
         wp_send_json_error( [ 'message' => 'Please complete the reCAPTCHA.' ] );
     }
 
+    $keys = mm_get_recaptcha_keys();
     $verify = wp_remote_post( 'https://www.google.com/recaptcha/api/siteverify', [
         'body' => [
-            'secret'   => '6LeFcHEsAAAAALPJav86cwiwczhQVJwiU8oWRvtB',
+            'secret'   => $keys['secret_key'],
             'response' => $recaptcha_response,
         ],
     ] );
 
     $verify_body = json_decode( wp_remote_retrieve_body( $verify ), true );
     if ( empty( $verify_body['success'] ) || ( isset( $verify_body['score'] ) && $verify_body['score'] < 0.5 ) ) {
-        wp_send_json_error( [ 'message' => 'reCAPTCHA verification failed. Please try again.' ] );
+        $error_msg = 'reCAPTCHA verification failed. Please try again.';
+        if ( isset( $verify_body['error-codes'] ) && is_array( $verify_body['error-codes'] ) ) {
+            $error_msg .= ' (Error: ' . implode( ', ', $verify_body['error-codes'] ) . ')';
+        }
+        wp_send_json_error( [ 'message' => $error_msg ] );
     }
 
     // Get show_id

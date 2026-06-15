@@ -226,6 +226,38 @@
                 "prepend": "",
                 "append": "",
                 "maxlength": ""
+            },
+            {
+                "key": "field_mm_recaptcha_site_key",
+                "label": "reCAPTCHA v3 Site Key",
+                "name": "recaptcha_site_key",
+                "type": "text",
+                "instructions": "Enter your Google reCAPTCHA v3 Site Key. If empty, the default site key will be used.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_mm_recaptcha_secret_key",
+                "label": "reCAPTCHA v3 Secret Key",
+                "name": "recaptcha_secret_key",
+                "type": "text",
+                "instructions": "Enter your Google reCAPTCHA v3 Secret Key. If empty, the default secret key will be used.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
             }
         ],
         "location": [
